@@ -49,37 +49,38 @@ export default function HomePage() {
       <BenefitsExplainer />
 
       {/* Key Benefits Section */}
-      <section className="py-20 bg-gray-50 text-center">
-        <div className="container">
+      <section className="py-20 text-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-green-400 via-green-500 to-green-600 animate-gradient-x"></div>
+        <div className="container relative z-10">
           <AnimationWrapper>
-            <h2 className="text-3xl md:text-4xl font-semibold mb-12 headline-animated" style={{ fontFamily: 'var(--neue-montreal)' }}>
-              The best sleep you've <span className="text-secondary">ever had</span>
+            <h2 className="text-3xl md:text-4xl font-semibold mb-12 headline-animated text-white" style={{ fontFamily: 'var(--neue-montreal)' }}>
+              The best sleep you've <span className="text-white font-bold">ever had</span>
             </h2>
           </AnimationWrapper>
           
-          <p className="text-lg text-accent-light mb-16 max-w-3xl mx-auto fade-in">
+          <p className="text-lg text-white mb-16 max-w-3xl mx-auto fade-in">
             Our products are scientifically proven to deliver real results for your sleep, every night
           </p>
           
           <div className="grid md:grid-cols-4 gap-10">
-            <div className="fade-in-up">
-              <h3 className="text-3xl md:text-4xl font-bold text-secondary mb-2">44%</h3>
-              <p className="text-accent">Less time to fall asleep</p>
+            <div className="fade-in-up bg-white/10 backdrop-blur-sm p-6 rounded-lg">
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-2">44%</h3>
+              <p className="text-white">Less time to fall asleep</p>
             </div>
             
-            <div className="fade-in-up stagger-delay-1">
-              <h3 className="text-3xl md:text-4xl font-bold text-secondary mb-2">34%</h3>
-              <p className="text-accent">More deep sleep</p>
+            <div className="fade-in-up stagger-delay-1 bg-white/10 backdrop-blur-sm p-6 rounded-lg">
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-2">34%</h3>
+              <p className="text-white">More deep sleep</p>
             </div>
             
-            <div className="fade-in-up stagger-delay-2">
-              <h3 className="text-3xl md:text-4xl font-bold text-secondary mb-2">45%</h3>
-              <p className="text-accent">Reduction in snoring</p>
+            <div className="fade-in-up stagger-delay-2 bg-white/10 backdrop-blur-sm p-6 rounded-lg">
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-2">45%</h3>
+              <p className="text-white">Reduction in snoring</p>
             </div>
             
-            <div className="fade-in-up stagger-delay-3">
-              <h3 className="text-3xl md:text-4xl font-bold text-secondary mb-2">23%</h3>
-              <p className="text-accent">Fewer night wake ups</p>
+            <div className="fade-in-up stagger-delay-3 bg-white/10 backdrop-blur-sm p-6 rounded-lg">
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-2">23%</h3>
+              <p className="text-white">Fewer night wake ups</p>
             </div>
           </div>
         </div>
