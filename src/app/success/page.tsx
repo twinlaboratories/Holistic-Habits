@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useCart } from '@/lib/cart-context';
-import { sendOrderConfirmationEmail } from '@/lib/email';
 
 interface OrderItem {
   productId: string;
@@ -36,7 +35,6 @@ export default function SuccessPage() {
   const [orderSummary, setOrderSummary] = useState<OrderSummary | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [emailSent, setEmailSent] = useState(false);
 
   useEffect(() => {
     if (!sessionId) {
@@ -54,28 +52,6 @@ export default function SuccessPage() {
         const data = await response.json();
         setOrderSummary(data);
         clearCart(); // Clear the cart after successful order
-
-        // Send confirmation email if we have customer email
-        if (data.customerEmail) {
-          try {
-            await sendOrderConfirmationEmail({
-              orderNumber: data.id,
-              customerName: data.customerName || 'Valued Customer',
-              customerEmail: data.customerEmail,
-              items: data.items?.map((item: OrderItem) => ({
-                name: item.name || `Product ID: ${item.productId}`,
-                quantity: item.quantity,
-                price: item.price || 0
-              })) || [],
-              total: data.amount,
-              shippingAddress: data.shippingAddress
-            });
-            setEmailSent(true);
-          } catch (emailError) {
-            console.error('Failed to send confirmation email:', emailError);
-            // Don't set error state as the order was successful
-          }
-        }
       } catch (err) {
         setError('Failed to load order details. Please contact customer support.');
         console.error('Error fetching order details:', err);
@@ -129,19 +105,14 @@ export default function SuccessPage() {
           </div>
           
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Thank you for your order!</h1>
-          {orderSummary?.customerEmail && (
-            <p className="text-lg text-gray-600">
-              {emailSent 
-                ? `Order confirmation has been sent to ${orderSummary.customerEmail}`
-                : `A confirmation will be sent to ${orderSummary.customerEmail}`
-              }
-            </p>
-          )}
           {orderSummary?.id && (
             <div className="mt-2 text-sm text-gray-500">
               Order ID: {orderSummary.id}
             </div>
           )}
+          <p className="text-md text-gray-600 mt-3">
+            Please expect your order within 7-10 working days
+          </p>
         </div>
 
         {orderSummary?.amount && (

@@ -13,7 +13,6 @@ export default function CartPage() {
   const { items, updateQuantity, updateSize, removeItem, cartTotal, clearCart } = useCart();
   const [orderSuccess, setOrderSuccess] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [email, setEmail] = useState('');
   
   // Check if all bundle products are in the cart
   const bundleProducts = getBundleProducts();
@@ -49,7 +48,7 @@ export default function CartPage() {
             
             <h1 className="text-2xl font-bold text-accent mb-2">Order Placed Successfully!</h1>
             <p className="text-accent-light mb-6">
-              Thank you for your order. We'll send you a confirmation email shortly.
+              Thank you for your order.
             </p>
             
             <Link href="/" className="btn-primary">
@@ -108,7 +107,6 @@ export default function CartPage() {
         },
         body: JSON.stringify({
           items: cartItemsWithDetails,
-          customerEmail: email || undefined, // Only include if email is provided
           isBundle: isFullBundle,
           bundleDiscount: bundleDiscount
         }),
@@ -274,21 +272,6 @@ export default function CartPage() {
               
               <div className="space-y-4">
                 <form onSubmit={handleCheckout}>
-                  <div className="mb-4">
-                    <label htmlFor="email" className="block text-sm font-medium text-accent-light mb-1">
-                      Email (for order confirmation)
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="input w-full"
-                      placeholder="your@email.com"
-                      required
-                    />
-                  </div>
-
                   <button
                     type="submit"
                     className={`btn-primary w-full ${isProcessing ? 'opacity-75 cursor-wait' : ''}`}
